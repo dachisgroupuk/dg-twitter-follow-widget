@@ -38,7 +38,15 @@ class DGTwitterFollow_Widget extends WP_Widget {
     {
         extract( $args );
 
+        $title = apply_filters('widget_title', $instance['title']);
+
+
 	    echo $before_widget;
+        
+        if ( !empty( $title ) ):
+            echo $before_title . __( $title ) . $after_title;
+        endif;
+
         $this->followButton( $instance );
 	    echo $after_widget;
     }
@@ -107,6 +115,7 @@ class DGTwitterFollow_Widget extends WP_Widget {
     function update($new_instance, $old_instance) {
 	    // create a back up we can access it when updating content
 	    $instance                       = $old_instance;
+        $instance['title']              = strip_tags($new_instance['title']);
 	    $instance['screen_name']        = strip_tags($new_instance['screen_name']);
 	    $instance['show_count']         = strip_tags($new_instance['show_count']);
 	    $instance['show_screen_name']   = strip_tags($new_instance['show_screen_name']);
@@ -123,6 +132,10 @@ class DGTwitterFollow_Widget extends WP_Widget {
 	  function form($instance) {
 	    ?>
 	    <p>
+	        <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+	        <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ) ; ?>" />
+	    </p>
+        <p>
 	        <label for="<?php echo $this->get_field_id('screen_name'); ?>"><?php _e('Screen name:'); ?></label>
 	        <input class="widefat" id="<?php echo $this->get_field_id('screen_name'); ?>" name="<?php echo $this->get_field_name( 'screen_name' ); ?>" type="text" value="<?php echo esc_attr( $instance['screen_name'] ) ; ?>" />
 	    </p>
