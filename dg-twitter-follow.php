@@ -42,7 +42,7 @@ class DGTwitterFollow_Widget extends WP_Widget {
 
 
 	    echo $before_widget;
-        
+
         if ( !empty( $title ) ):
             echo $before_title . __( $title ) . $after_title;
         endif;
@@ -86,13 +86,13 @@ class DGTwitterFollow_Widget extends WP_Widget {
          */
         $settings = '';
 
-        $settings .= ( $show_count == true || $show_count =='yes' )? ' data-show-count="true"' : ' data-show-count="false"' ;
-        $settings .= ( $button_size == 'medium' )? ' data-size="medium"' : ' data-size="large"' ;
+        $settings .= ( isset( $show_count ) && ( $show_count == true || $show_count =='yes' ) )? ' data-show-count="true"' : ' data-show-count="false"' ;
+        $settings .= ( isset( $button_size ) && $button_size == 'medium' )? ' data-size="medium"' : ' data-size="large"' ;
         $settings .= ( !empty($width) )? ' data-width="' . $width . '"' : '' ;
-        $settings .= ( $align == 'right' )? ' data-align="right"' : ' data-align="left"' ;
-        $settings .= ( $show_screen_name == 'yes' || $show_screen_name == 'true' )? ' data-show-screen-name="true"' : ' data-show-screen-name="false"' ;
-        $settings .= ( $custom_style == 'yes' || $custom_style == 'true' )? ' dnt="true"' : '' ;
-        $settings .= ' language="'.$language.'"' ;
+        $settings .= ( isset( $align ) && $align == 'right' )? ' data-align="right"' : ' data-align="left"' ;
+        $settings .= ( isset( $show_screen_name ) && ( $show_screen_name == 'yes' || $show_screen_name == 'true' ) )? ' data-show-screen-name="true"' : ' data-show-screen-name="false"' ;
+        $settings .= ( isset( $custom_style) && ( $custom_style == 'yes' || $custom_style == 'true' ) )? ' dnt="true"' : '' ;
+        $settings .= ( isset( $language ) )? ' language="'.$language.'"' : '' ;
 
         $settings = trim($settings);
         $link = 'https://twitter.com/'.$screen_name;
